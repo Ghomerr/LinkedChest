@@ -1,0 +1,73 @@
+TODO:
+- Add "none" when no chest is found
+- Dispensers ?
+- Add a command to teleport to master and linked chests 
+- Chest creator only allowed to open it
+- Load plugin later
+- Lowest event for open inventory + check cancel
+- Config : max number of linked chests allowed 
+- One way linked chests ? (option per chest in/out)
+- 2012-08-29 19:56:23 [WARNING] [LinkedChest] Unknown message key 'HELP_DEBUG' in the messages file.
+2012-08-29 19:56:23 [WARNING] [LinkedChest] Unknown message key 'HELP_USE_PERMISSIONS' in the messages file.
+
+Version 1.3.x on 2012-xx-xx:
+- Messages files update (missing new command in global help)
+
+Version 1.3.0 on 2012-08-21:
+- Support RB 1.3.1-R2.0
+- New command: /lc move <chestName> : move a master chest to the targeted chest
+- Messages files update
+
+Version 1.2.4 on 2012-08-08:
+- Support RB 1.3.1-R1.0
+- Inventory reference is no more used (attempt to avoid the bug of chest rollback: using the direct master chest reference through its location)
+- Fix a concurrency issue on chests data loading
+
+Version 1.2.3 on 2012-07-11:
+- Forcing save worlds when disabling the plugin (avoid losing items problem)
+- Adding new configuration "saveallperiod" to save worlds (with /save-all) when a player closes a master/linked 
+
+Version 1.2.2 on 2012-06-17:
+- Support RB 1.2.5-R4.0
+- Add research feature for the /lc list command
+
+Version 1.2.1 on 2012-04-09:
+- Remove logs on getWithColors method (useless)
+- Fix the help main message.
+- Add the help message if you try to use /tg tg
+
+Version 1.2 on 2012-04-04:
+- Make the config command more generic to handle update on each config parameter
+- Support default language for messages (use default in configuration and it won't use a file to display messages, which are stored inside the plugin)
+- Number of messages variables is known and will be checked at the messages loading
+- Remove braces in messages file where they did not contain a message variable
+- Remove debug message for location parsing because of heavy amount of logs
+- Remove debug and permissions commands. They are available within the command "config" now.
+- Remove unused permissions nodes (for debug/perms commands and sign place action, as signs are no more used)
+- Display the complete help message when the command /linkedchest is used without arguments
+- Support RB 1.2.5-R1.0
+
+Version 1.1.2 on 2012-03-29:
+- Support RB 1.2.4-R1.0
+
+Version 1.1.1 on 2012-03-27:
+- Support RB 1.2.4-R0.1
+- Add a message when trying to link or unlink another block than chest
+
+Version 1.1 on 2012-03-18:
+- Modify the linked chest system to use location instead of signs to find linkedchests
+- New commands to link and unlink chests
+- Better management of double chests
+- Fix the master chest option saving
+- Improve and fix the help command
+- Fix the configuration loading when file is missing
+- Modify plugin files names (linkedchest.properties stores linked chests data, masterchest.properties stores master chests data, configuration.properties stores configuration)
+
+Version 1.0.1 on 2012-03-17:
+- Fix chestname in the doublechest map
+- Fix the Plugin version in the plugin.yml file
+- Add version command (New message)
+- Fix the help command (was admin command by default)
+
+Version 1.0 on 2012-03-16:
+- Official first release
