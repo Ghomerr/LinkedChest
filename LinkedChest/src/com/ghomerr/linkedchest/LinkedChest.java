@@ -72,7 +72,6 @@ public class LinkedChest extends JavaPlugin
 			_LOGGER.info(Constants.TAG + "configLoaded=" + isConfigLoaded);
 			_LOGGER.info(Constants.TAG + "_masterChestsData=" + _masterChestsData);
 			_LOGGER.info(Constants.TAG + "_linkedChestsData=" + _linkedChestsData);
-			_LOGGER.info(Constants.TAG + "_linkedChestsData=" + _linkedChestsData);
 		}
 
 		if (isConfigLoaded && _masterChestsData != null && _linkedChestsData != null && isDataLoaded)
@@ -789,6 +788,11 @@ public class LinkedChest extends JavaPlugin
 				}
 
 				// LOAD LINKED CHESTS DATA
+				if (DebugUtils.isDebugEnabled())
+				{
+					_LOGGER.info(Constants.TAG + "Loading linkedchest data. There is " 
+						+ _linkedChestsData.size() + " linkedchest lines to verify.");
+				}
 				if (_linkedChestsData != null && !_linkedChestsData.isEmpty())
 				{
 					final Set<Object> keySet = _linkedChestsData.keySet();
@@ -796,6 +800,11 @@ public class LinkedChest extends JavaPlugin
 					for (final Object key : keySet)
 					{
 						final String linkedChestShortLoc = String.valueOf(key);
+						if (DebugUtils.isDebugEnabled())
+						{
+							_LOGGER.info(Constants.TAG + "Checking line key = " + key 
+								+ " is equal to " + linkedChestShortLoc + " ?");
+						}
 						if (StringUtils.isNotBlank(linkedChestShortLoc))
 						{
 							final String lowerShortLoc = linkedChestShortLoc.toLowerCase();
@@ -811,6 +820,11 @@ public class LinkedChest extends JavaPlugin
 							}
 							else
 							{
+								if (DebugUtils.isDebugEnabled())
+								{
+									_LOGGER.info(Constants.TAG + "Removing entry for shortloc= " + key 
+										+ ", because 'value' is empty or no master chest found: value= " + value);
+								}
 								objectsToRemove.add(key);
 							}
 						}
@@ -826,6 +840,11 @@ public class LinkedChest extends JavaPlugin
 					{
 						_LOGGER.info(Constants.TAG + "No data in Linked Chests data file.");
 					}
+				}
+				if (DebugUtils.isDebugEnabled())
+				{
+					_LOGGER.info(Constants.TAG + "Loading linkedchest data. There is " 
+						+ _linkedChestsData.size() + " at the end of the verification.");
 				}
 			}
 			else

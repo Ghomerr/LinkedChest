@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockBurnEvent;
@@ -34,7 +35,7 @@ public class BlockEventListener implements Listener
 		this.plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST)
 	public void onBlockBreakEvent(final BlockBreakEvent event)
 	{
 		final Block block = event.getBlock();
@@ -70,32 +71,66 @@ public class BlockEventListener implements Listener
 		}
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST)
 	public void onEntityExplodeEvent(final EntityExplodeEvent event)
 	{
-		final List<Block> blockList = event.blockList();
-		for (final Block block : blockList)
+		if (!event.isCancelled())
 		{
+			final List<Block> blockList = event.blockList();
+			for (final Block block : blockList)
+			{
+				final BrokenChest chest = getBrokenChest(block);
+				switch (chest.type)
+				{
+					case MASTER_CHEST:
+					{
+						event.setCancelled(true);
+						_LOGGER.info(Constants.TAG + "Master Chest '" + chest.name
+								+ "' has been saved from explosion caused by "
+								+ event.getEntity() + " at " + StringUtils.printShortLocation(event.getLocation()));
+						break;
+					}
+	
+					case LINKED_CHEST:
+					{
+						if(plugin.removeLinkedChestLocation(block.getLocation()))
+						{
+							if (DebugUtils.isDebugEnabled())
+							{
+								_LOGGER.info(Constants.TAG + "Linked Chest '" + chest.name + "' has been destroyed by explosion caused by "
+										+ event.getEntity() + " at " + StringUtils.printShortLocation(event.getLocation()));
+							}
+						}
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void onBlockBurnEvent(final BlockBurnEvent event)
+	{
+		if (!event.isCancelled())
+		{
+			final Block block = event.getBlock();
 			final BrokenChest chest = getBrokenChest(block);
 			switch (chest.type)
 			{
 				case MASTER_CHEST:
 				{
 					event.setCancelled(true);
-					_LOGGER.info(Constants.TAG + "Master Chest '" + chest.name
-							+ "' has been saved from explosion caused by "
-							+ event.getEntity() + " at " + StringUtils.printShortLocation(event.getLocation()));
+					_LOGGER.info(Constants.TAG + "Master Chest '" + chest.name + "' has been saved from burning");
 					break;
 				}
-
+	
 				case LINKED_CHEST:
 				{
-					if(plugin.removeLinkedChestLocation(block.getLocation()))
+					if (plugin.removeLinkedChestLocation(block.getLocation()))
 					{
 						if (DebugUtils.isDebugEnabled())
 						{
-							_LOGGER.info(Constants.TAG + "Linked Chest '" + chest.name + "' has been destroyed by explosion caused by "
-									+ event.getEntity() + " at " + StringUtils.printShortLocation(event.getLocation()));
+							_LOGGER.info(Constants.TAG + "Linked Chest '" + chest.name + "' has been destroyed by burning");
 						}
 					}
 					break;
@@ -104,62 +139,37 @@ public class BlockEventListener implements Listener
 		}
 	}
 
-	@EventHandler
-	public void onBlockBurnEvent(final BlockBurnEvent event)
-	{
-		final Block block = event.getBlock();
-		final BrokenChest chest = getBrokenChest(block);
-		switch (chest.type)
-		{
-			case MASTER_CHEST:
-			{
-				event.setCancelled(true);
-				_LOGGER.info(Constants.TAG + "Master Chest '" + chest.name + "' has been saved from burning");
-				break;
-			}
-
-			case LINKED_CHEST:
-			{
-				if (plugin.removeLinkedChestLocation(block.getLocation()))
-				{
-					if (DebugUtils.isDebugEnabled())
-					{
-						_LOGGER.info(Constants.TAG + "Linked Chest '" + chest.name + "' has been destroyed by burning");
-					}
-				}
-				break;
-			}
-		}
-	}
-
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST)
 	public void onBlockPlaceEvent(final BlockPlaceEvent event)
 	{
-		final Block placedBlock = event.getBlockPlaced();
-		if (WorldUtils.isChest(placedBlock))
+		if (!event.isCancelled())
 		{
-			final Block block = WorldUtils.getChestNearby(placedBlock, Block.class);
-			if (block != null)
+			final Block placedBlock = event.getBlockPlaced();
+			if (WorldUtils.isChest(placedBlock))
 			{
-				String chestName = plugin.getMasterChestNameFromBlock(block);
-				if (chestName != null)
+				final Block block = WorldUtils.getChestNearby(placedBlock, Block.class);
+				if (block != null)
 				{
-					event.getPlayer().sendMessage(
-							MessagesUtils.getWithColors(Messages.CANNOT_PLACE_CHEST_NEARBY, ChatColor.RED,
-									ChatColor.AQUA, chestName));
-					event.setCancelled(true);
-				}
-				else
-				{
-					chestName = plugin.getLinkedChestNameFromBlock(block);
+					String chestName = plugin.getMasterChestNameFromBlock(block);
 					if (chestName != null)
 					{
-						final Location loc = placedBlock.getLocation();
-						if (plugin.addLinkedChest(loc, chestName))
+						event.getPlayer().sendMessage(
+								MessagesUtils.getWithColors(Messages.CANNOT_PLACE_CHEST_NEARBY, ChatColor.RED,
+										ChatColor.AQUA, chestName));
+						event.setCancelled(true);
+					}
+					else
+					{
+						chestName = plugin.getLinkedChestNameFromBlock(block);
+						if (chestName != null)
 						{
-							if (DebugUtils.isDebugEnabled())
+							final Location loc = placedBlock.getLocation();
+							if (plugin.addLinkedChest(loc, chestName))
 							{
-								_LOGGER.info(Constants.TAG + "Double Linked Chest '" + chestName + "' has been added at " + loc);
+								if (DebugUtils.isDebugEnabled())
+								{
+									_LOGGER.info(Constants.TAG + "Double Linked Chest '" + chestName + "' has been added at " + loc);
+								}
 							}
 						}
 					}
