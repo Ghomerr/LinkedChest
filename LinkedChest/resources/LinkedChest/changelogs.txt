@@ -6,9 +6,12 @@ TODO:
 - Config : max number of linked chests allowed 
 - One way linked chests ? (option per chest in/out)
 
-Version 1.3.2 on 2012-12-24:
+Version 1.3.3 on 2012-12-24:
 * Support RB 1.4.6-R0.2
 * Fix the ability to open a linked or a master chest (default inventory) when not allowed to do it.
+
+Version 1.3.2 on 2012-10-16: 
+* Fix a case issue on linkedchest loading
 
 Version 1.3.1 on 2012-10-15:
 - Support RB 1.3.2-R1.0

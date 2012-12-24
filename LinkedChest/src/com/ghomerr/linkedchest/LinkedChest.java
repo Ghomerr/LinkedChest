@@ -807,15 +807,15 @@ public class LinkedChest extends JavaPlugin
 						}
 						if (StringUtils.isNotBlank(linkedChestShortLoc))
 						{
-							final String lowerShortLoc = linkedChestShortLoc.toLowerCase();
-							final String value = _linkedChestsData.getProperty(lowerShortLoc);
+							final String shortLoc = linkedChestShortLoc;
+							final String value = _linkedChestsData.getProperty(shortLoc);
 							if (StringUtils.isNotBlank(value) && hasChestName(value))
 							{
 								final String chestName = value.toLowerCase();
 								synchronized (_monitor)
 								{
 									final VirtualInventory vInv = _virtualInventoriesMap.get(chestName);
-									vInv.linkedChests.add(lowerShortLoc);
+									vInv.linkedChests.add(shortLoc);
 								}
 							}
 							else
