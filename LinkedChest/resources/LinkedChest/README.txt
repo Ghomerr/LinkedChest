@@ -75,3 +75,9 @@ INTRODUCTION:
 		/lc help <c> : display general help without parameter and the help message of the given command
 		/lc list <r>: display chests list or only chests which start with letters in <r> (use empty parameter or * to display all chests)
 		/lc version : display the current plugin version
+		
+6) Known issue:
+    - Chest is not a chest:
+        When you place a chest surrounded by natural snow, you may encounter difficulties to use commands on this chest. 
+        This is because the snow is selected instead of the chest. 
+        Try to use commands by being on top of the chest and targeting it from above.

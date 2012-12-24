@@ -142,7 +142,7 @@ public class BlockEventListener implements Listener
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void onBlockPlaceEvent(final BlockPlaceEvent event)
 	{
-		if (!event.isCancelled())
+		if (!event.isCancelled() && event.getPlayer() != null)
 		{
 			final Block placedBlock = event.getBlockPlaced();
 			if (WorldUtils.isChest(placedBlock))

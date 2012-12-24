@@ -78,6 +78,10 @@ public class InventoryInteractionListener implements Listener
 										player.openInventory(virtualInv);
 										plugin.playersWhoOpenChests.add(player.getName());
 									}
+									else
+									{
+										event.setCancelled(true);
+									}
 								}
 								else
 								{
@@ -89,6 +93,10 @@ public class InventoryInteractionListener implements Listener
 										event.setCancelled(true);
 										player.openInventory(virtualInv);
 										plugin.playersWhoOpenChests.add(player.getName());
+									}
+									else
+									{
+										event.setCancelled(true);
 									}
 								}
 							}

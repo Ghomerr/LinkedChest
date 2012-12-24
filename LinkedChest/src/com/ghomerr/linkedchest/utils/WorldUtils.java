@@ -7,8 +7,8 @@ import org.bukkit.block.BlockFace;
 
 public class WorldUtils
 {
-	// private static final Logger _LOGGER = Logger.getLogger(Constants.MINECRAFT);
-	public static boolean isDebugEnabled = false;
+	//private static final Logger LOGGER = Logger.getLogger(Constants.MINECRAFT);
+	//public static boolean isDebugEnabled = false;
 	
 //	public static String getVirtualChestNameFromSign (final LinkedChest plugin, final Block chest)
 //	{
@@ -113,6 +113,7 @@ public class WorldUtils
 	
 	public static boolean isChest(final Block block)
 	{
+		//LOGGER.info("[LC-Debug] Block type: " + block.getType());
 		return block != null && block.getType() == Material.CHEST;
 	}
 	
