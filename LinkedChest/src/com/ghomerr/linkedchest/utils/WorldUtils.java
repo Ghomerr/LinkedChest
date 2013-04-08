@@ -114,10 +114,28 @@ public class WorldUtils
 	public static boolean isChest(final Block block)
 	{
 		//LOGGER.info("[LC-Debug] Block type: " + block.getType());
-		return block != null && block.getType() == Material.CHEST;
+		final Material blockType = block.getType();
+		return block != null && 
+				(blockType == Material.CHEST 
+				|| blockType == Material.TRAPPED_CHEST);
 	}
 	
-	public static <T> T getChestNearby(final Block block, final Class<T> returnedType)
+	public static boolean areSameChests(final Block b1, final Block b2)
+	{
+		if (b1 != null && b2 != null)
+		{
+			final Material t1 = b1.getType(), t2 = b2.getType();
+			return t1 == t2 
+				&& (t1 == Material.CHEST 
+				|| t1 == Material.TRAPPED_CHEST);
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public static <T> T getSameChestNearby(final Block block, final Class<T> returnedType)
 	{
 		for (final BlockFace face : BlockFace.values())
 		{
@@ -129,7 +147,7 @@ public class WorldUtils
 				case WEST:
 				{
 					final Block nearbyBlock = block.getRelative(face);
-					if (WorldUtils.isChest(nearbyBlock))
+					if (areSameChests(block, nearbyBlock))
 					{
 						if (returnedType == Block.class)
 						{

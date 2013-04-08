@@ -2,6 +2,8 @@ LinkedChest by Ghomerr
 
 INTRODUCTION:
 	This plugin allows to link chests together. 
+	You can link normal and trapped chests. 
+	Master trapped chests will generate current, but not Linked trapped chests.
 	A command is used to create a master chest. 
 	Then, use a sign to link another chest to a master chest. 
 	The sign must contain the chest name between wildcards (*) on the first line. 

@@ -68,6 +68,7 @@ public class CommandsListener implements CommandExecutor
 												if (WorldUtils.isChest(block))
 												{
 													String checkChestName = plugin.getMasterChestNameFromBlock(block);
+													// Is Master Chest
 													if (checkChestName != null)
 													{
 														player.sendMessage(MessagesUtils.getWithColors(
@@ -77,6 +78,7 @@ public class CommandsListener implements CommandExecutor
 													else
 													{
 														checkChestName = plugin.getLinkedChestNameFromBlock(block);
+														// Is Linked Chest
 														if (checkChestName != null)
 														{
 															player.sendMessage(MessagesUtils.getWithColors(
@@ -85,9 +87,10 @@ public class CommandsListener implements CommandExecutor
 														}
 													}
 
+													// Is New Chest
 													if (checkChestName == null)
 													{
-														final Block doubleChestBlock = WorldUtils.getChestNearby(block, Block.class);
+														final Block doubleChestBlock = WorldUtils.getSameChestNearby(block, Block.class);
 														boolean isAdminChest = false;
 														String adminOption = null;
 
@@ -379,7 +382,7 @@ public class CommandsListener implements CommandExecutor
 																	.getLocation());
 															boolean linkSuccess = plugin.addLinkedChest(singleShortLoc, chestName);
 
-															final Location doubleLoc = WorldUtils.getChestNearby(block, Location.class);
+															final Location doubleLoc = WorldUtils.getSameChestNearby(block, Location.class);
 															if (doubleLoc != null)
 															{
 																final String doubleShortLoc = StringUtils.printShortLocation(doubleLoc);
@@ -593,7 +596,7 @@ public class CommandsListener implements CommandExecutor
 													if (chestNameCheck != null)
 													{
 														boolean removeSuccess = plugin.removeLinkedChestLocation(block.getLocation());
-														final Location doubleLoc = WorldUtils.getChestNearby(block, Location.class);
+														final Location doubleLoc = WorldUtils.getSameChestNearby(block, Location.class);
 														if (doubleLoc != null)
 														{
 															removeSuccess = plugin.removeLinkedChestLocation(doubleLoc);

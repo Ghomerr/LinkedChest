@@ -421,7 +421,7 @@ public class LinkedChest extends JavaPlugin
 	public boolean updateMasterChest(final String chestName, final Chest newMasterChest)
 	{
 		final String lowerChestName = chestName.toLowerCase();
-		final Block doubleChestBlock = WorldUtils.getChestNearby(newMasterChest.getBlock(), Block.class);
+		final Block doubleChestBlock = WorldUtils.getSameChestNearby(newMasterChest.getBlock(), Block.class);
 		final VirtualInventory vInv = _virtualInventoriesMap.get(lowerChestName);
 
 		VirtualInventory newVirtualInv = null;

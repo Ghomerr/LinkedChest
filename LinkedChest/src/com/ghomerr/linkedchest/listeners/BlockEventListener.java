@@ -147,7 +147,7 @@ public class BlockEventListener implements Listener
 			final Block placedBlock = event.getBlockPlaced();
 			if (WorldUtils.isChest(placedBlock))
 			{
-				final Block block = WorldUtils.getChestNearby(placedBlock, Block.class);
+				final Block block = WorldUtils.getSameChestNearby(placedBlock, Block.class);
 				if (block != null)
 				{
 					String chestName = plugin.getMasterChestNameFromBlock(block);
