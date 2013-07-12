@@ -29,7 +29,6 @@ import com.ghomerr.linkedchest.utils.ConfigurationUtils;
 import com.ghomerr.linkedchest.utils.DebugUtils;
 import com.ghomerr.linkedchest.utils.FileUtils;
 import com.ghomerr.linkedchest.utils.MessagesUtils;
-import com.ghomerr.linkedchest.utils.PermissionsUtils;
 import com.ghomerr.linkedchest.utils.StringUtils;
 import com.ghomerr.linkedchest.utils.WorldUtils;
 
@@ -78,9 +77,6 @@ public class LinkedChest extends JavaPlugin
 		{
 			// Load Messages
 			MessagesUtils.loadMessages(getLanguage());
-
-			// Load Permissions
-			PermissionsUtils.loadPermissions(this);
 
 			// Register Commands
 			final CommandsListener cmdExec = new CommandsListener(this);
