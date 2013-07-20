@@ -170,7 +170,7 @@ public class PermissionsUtils
 			}
 		}
 
-		if (!hasPerm && permissionNode.actionMessage != null)
+		if (!hasPerm && permissionNode.actionMessage != null && player.isOnline())
 		{
 			player.sendMessage(ChatColor.RED
 					+ MessagesUtils.getWithColor(permissionNode.actionMessage, ChatColor.RED));
@@ -187,7 +187,7 @@ public class PermissionsUtils
 
 		hasPerm = hasPermission(player, permissionNode);
 
-		if (!hasPerm && permissionNode.command != null)
+		if (!hasPerm && permissionNode.command != null && player.isOnline())
 		{
 			player.sendMessage(ChatColor.RED
 					+ MessagesUtils.getWithColors(Messages.COMMAND_NOT_ALLOWED, ChatColor.RED, ChatColor.AQUA,

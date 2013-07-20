@@ -1,9 +1,21 @@
 package com.ghomerr.linkedchest.utils;
 
+import java.util.List;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.Chest;
+import org.bukkit.block.Hopper;
+import org.bukkit.entity.minecart.HopperMinecart;
+import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
+import org.bukkit.metadata.Metadatable;
+
+import com.ghomerr.linkedchest.LinkedChest;
+import com.ghomerr.linkedchest.enums.HopperType;
 
 public class WorldUtils
 {
@@ -120,6 +132,40 @@ public class WorldUtils
 				|| blockType == Material.TRAPPED_CHEST);
 	}
 	
+	public static boolean isHopper(final Block block)
+	{
+		final Material blockType = block.getType();
+		return block != null && 
+				(blockType == Material.HOPPER 
+				|| blockType == Material.HOPPER_MINECART);
+	}
+	
+	public static boolean isHopper(final InventoryHolder holder)
+	{		
+		return (holder != null && (holder instanceof Hopper || holder instanceof HopperMinecart));
+	}
+	
+	public static boolean isChest(final InventoryHolder holder)
+	{
+		return (holder != null && (holder instanceof Chest));
+	}
+	
+	public static HopperType getHopperType(final InventoryHolder holder)
+	{
+		if (holder != null)
+		{
+			if (holder instanceof Hopper)
+			{
+				return HopperType.BLOCK;
+			}
+			else if (holder instanceof HopperMinecart)
+			{
+				return HopperType.MINECART;
+			}
+		}
+		return HopperType.OTHER;
+	}
+	
 	public static boolean areSameChests(final Block b1, final Block b2)
 	{
 		if (b1 != null && b2 != null)
@@ -163,6 +209,49 @@ public class WorldUtils
 		}
 		return null;
 	}
+	
+	public static Object getMetadata(final Metadatable object, final String key, final LinkedChest plugin)
+	{
+	  final List<MetadataValue> values = object.getMetadata(key);  
+	  for (final MetadataValue value : values)
+	  {
+	     if(value.getOwningPlugin().getDescription().getName().equals(plugin.getDescription().getName()))
+	     {
+	        return value.value();
+	     }
+	  }
+	  return null;
+	}
+	
+	public static void setMetadata(final Metadatable mcObject, final String key, final Object value, final LinkedChest plugin)
+	{
+		mcObject.setMetadata(key, new FixedMetadataValue(plugin, value));
+	}
+	
+//	public static String getChestNameNearbyHopper(final Block hopper, final LinkedChest plugin)
+//	{
+//		for (final BlockFace face : BlockFace.values())
+//		{
+//			switch(face)
+//			{
+//				case NORTH:
+//				case EAST:
+//				case SOUTH:
+//				case WEST:
+//				case UP:
+//				case DOWN:
+//				{
+//					final Block nearbyBlock = hopper.getRelative(face);
+//					String chestName = plugin.getMasterChestNameFromBlock(nearbyBlock);
+//					if (chestName == null)
+//					{
+//						chestName = plugin.getLinkedChestNameFromBlock(nearbyBlock);
+//					}
+//				}
+//			}
+//		}
+//		return null;
+//	}
 	
 //	public static String getChestNameOnSign(final Sign sign)
 //	{

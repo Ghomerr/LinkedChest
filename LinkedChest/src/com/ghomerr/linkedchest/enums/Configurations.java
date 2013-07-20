@@ -8,6 +8,10 @@ public enum Configurations
 {
 	DEBUG("debug", Boolean.class, Boolean.FALSE),
 	
+//	HOPPERS("hoppers", Boolean.class, Boolean.TRUE),
+	
+	DISPLAY_OPEN_MESSAGE("displayopenmessage", Boolean.class, Boolean.TRUE),
+	
 	LANGUAGE("language", String.class, Constants.DEFAULT_LANGUAGE),
 	
 	SAVEALL_PERIOD("saveallperiod", String.class, Constants.DISABLED),

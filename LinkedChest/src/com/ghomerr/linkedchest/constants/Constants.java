@@ -63,4 +63,6 @@ public interface Constants
 	public static final long ONE_MINUTE_IN_MILLISECS = 60000;
 
 	public static final String NUMBER_PATTERN = "^[0-9]+$";
+	
+	public static final String HOPPER_CREATOR_KEY = "hoppercreator";
 }

@@ -12,6 +12,7 @@ INTRODUCTION:
 	Master chests are protected against explosions. Linked chests are not protected at all. 
 	You wont be able to place a chest near a simple master chest. Place it before adding the master chest.
 	Double master chests seems to not work in versions older than 1.2.3 of Craftbukkit.
+	You cannot open linked or master chests if a block is in hand, to avoid a conflict with the shift-click.
 
 1) How to install:
 	Only put the "LinkedChest-x.x.x.jar" file in your plugins directory, inside the minecraft server directory.
@@ -25,6 +26,7 @@ INTRODUCTION:
 2) How to configure:
 	Fill the configuration file linkedchest.config has you want, using these parameters:
 		debug: Values (true|false) -> Enable/Disable the debug mode. (There is barely no debug messages for now)
+		displayopenmessage : Values (true|false) -> Display or not the messages when linked or master chests are open.
 		language: Values (language code) -> Select the messages file corresponding to this configuration. You can use "default" value for default English messages.
 		usepermissions: Values (true|false) -> Enable permissions (PermissionsBukkit, PermissionsEx and Native Bukkit's Permissions system are supported).
 		saveallperiod: Values (number or "disabled") -> Enabled forcing save-all command when a linked/master chest is closed, or when there is a plugins /reload.

@@ -68,6 +68,13 @@ public class BlockEventListener implements Listener
 				}
 				break;
 			}
+			
+//			default:
+//				if (WorldUtils.isHopper(block))
+//				{
+//					// Remove metadata of hoppers when broken
+//					block.removeMetadata(Constants.HOPPER_CREATOR_KEY, plugin);
+//				}
 		}
 	}
 
@@ -103,6 +110,13 @@ public class BlockEventListener implements Listener
 						}
 						break;
 					}
+					
+//					default:
+//						if (WorldUtils.isHopper(block))
+//						{
+//							// Remove metadata of hoppers when broken
+//							block.removeMetadata(Constants.HOPPER_CREATOR_KEY, plugin);
+//						}
 				}
 			}
 		}
@@ -135,6 +149,13 @@ public class BlockEventListener implements Listener
 					}
 					break;
 				}
+				
+//				default:
+//					if (WorldUtils.isHopper(block))
+//					{
+//						// Remove metadata of hoppers when broken
+//						block.removeMetadata(Constants.HOPPER_CREATOR_KEY, plugin);
+//					}
 			}
 		}
 	}
@@ -175,6 +196,16 @@ public class BlockEventListener implements Listener
 					}
 				}
 			}
+//			else if (WorldUtils.isHopper(placedBlock))
+//			{
+//				// When a Hopper is placed, add the player name in its data
+//				final String playerName = event.getPlayer().getName();
+//				if (DebugUtils.isDebugEnabled())
+//				{
+//					_LOGGER.info(Constants.TAG + playerName + " has placed a Hopper block");
+//				}
+//				placedBlock.setMetadata(Constants.HOPPER_CREATOR_KEY, new FixedMetadataValue(plugin, playerName));
+//			}
 		}
 	}
 

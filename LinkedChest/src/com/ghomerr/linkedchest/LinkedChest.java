@@ -39,6 +39,7 @@ public class LinkedChest extends JavaPlugin
 
 	public InventoryInteractionListener invListener = null;
 	public BlockEventListener blockListener = null;
+	// public VehicleEventListener vehicleListener = null;
 
 	private Object _monitor = new Object();
 
@@ -89,6 +90,7 @@ public class LinkedChest extends JavaPlugin
 			// Register Events
 			invListener = new InventoryInteractionListener(this);
 			blockListener = new BlockEventListener(this);
+			// vehicleListener = new VehicleEventListener(this);
 		}
 		else
 		{
@@ -212,10 +214,8 @@ public class LinkedChest extends JavaPlugin
 		return null;
 	}
 
-	public String getMasterChestNameFromBlock(final Block block)
+	public String getMasterChestNameFrom(final Location loc)
 	{
-		Location loc = block.getLocation();
-
 		final String shortLoc = StringUtils.printShortLocation(loc);
 
 		String chestName = null;
@@ -227,11 +227,14 @@ public class LinkedChest extends JavaPlugin
 
 		return chestName;
 	}
-
-	public String getLinkedChestNameFromBlock(final Block block)
+	
+	public String getMasterChestNameFromBlock(final Block block)
 	{
-		Location loc = block.getLocation();
-
+		return getMasterChestNameFrom(block.getLocation());
+	}
+	
+	public String getLinkedChestNameFrom(final Location loc)
+	{
 		final String shortLoc = StringUtils.printShortLocation(loc);
 
 		String chestName = null;
@@ -242,6 +245,11 @@ public class LinkedChest extends JavaPlugin
 		}
 
 		return chestName;
+	}
+
+	public String getLinkedChestNameFromBlock(final Block block)
+	{
+		return getLinkedChestNameFrom(block.getLocation());
 	}
 
 	public void setVirtualInventory(final String name, final VirtualInventory virtualInv)
@@ -463,8 +471,9 @@ public class LinkedChest extends JavaPlugin
 		final Inventory virtualInv = getVirtualInventory(chestName);
 		if (virtualInv != null)
 		{
-			player.openInventory(virtualInv);
 			playersWhoOpenChests.add(player.getName());
+			player.openInventory(virtualInv);
+
 			return true;
 		}
 		else
@@ -573,6 +582,11 @@ public class LinkedChest extends JavaPlugin
 		return ConfigurationUtils.getConfigValueByType(Configurations.LANGUAGE, String.class);
 	}
 
+	public boolean isDisplayOpenMessageEnabled()
+	{
+		return ConfigurationUtils.getConfigValueByType(Configurations.DISPLAY_OPEN_MESSAGE, Boolean.class);
+	}
+	
 	public String getConfigList()
 	{
 		final StringBuilder strBld = new StringBuilder();

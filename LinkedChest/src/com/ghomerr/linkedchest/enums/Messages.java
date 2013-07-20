@@ -43,6 +43,7 @@ public enum Messages
 	FOUND_CHESTS("Found chests: "),
 	OPENING_MASTER_CHEST(1, "Opening master chest {chest}..."),
 	OPENING_LINKED_CHEST(1, "Opening linked chest {chest}..."),
+	CANNOT_OPEN_WITH_BLOCK("You cannot open a linked chest with a block in hand."),
 	MASTER_CHEST_UNBREAKABLE(1, "You cannot destroy the master chest {chest} without removing it previously."),
 	MASTER_CHEST_MOVE_SUCCESS(1, "The master chest {c} has been correclty moved."),
 	MASTER_CHEST_MOVE_FAILURE(1, "The master chest {c} has not been correctly moved."),
