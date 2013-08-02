@@ -472,12 +472,18 @@ public class CommandsListener implements CommandExecutor
 														if (targetContent == null || GlobalUtils.arrayIsEmpty(targetContent))
 														{
 															final Inventory masterInv = plugin.getVirtualInventory(chestName);
-															if (masterInv.getSize() == targetInv.getSize())
+															final ItemStack[] masterChestContent = masterInv.getContents();
+															if (targetInv.getSize() >= GlobalUtils.arrayLength(masterChestContent))
 															{
 																if(plugin.updateMasterChest(chestName, chest))
 																{
-    																targetInv.setContents(masterInv.getContents().clone());
-    																masterInv.clear();
+																	// If copy succeeded, master chest can be cleared
+																	if (GlobalUtils.copyArray(masterChestContent, targetContent))
+																	{
+	    																targetInv.setContents(targetContent);
+	    																masterInv.clear();
+																	}
+																	
     																player.sendMessage(MessagesUtils.getWithColors(Messages.MASTER_CHEST_MOVE_SUCCESS, ChatColor.GREEN,
 																			ChatColor.AQUA, chestName));
 																}
@@ -547,6 +553,20 @@ public class CommandsListener implements CommandExecutor
 										else
 										{
 											player.sendMessage(MessagesUtils.getWithColor(Messages.HELP_OPEN, ChatColor.YELLOW));
+										}
+										break;
+									}
+									
+									case POSITIONS:
+									{
+										if (split.length == 2)
+										{
+											final String chestName = split[1];
+											player.sendMessage(plugin.getLinkedChestsPositions(chestName));
+										}
+										else
+										{
+											player.sendMessage(MessagesUtils.getWithColor(Messages.HELP_POSITIONS, ChatColor.YELLOW));
 										}
 										break;
 									}

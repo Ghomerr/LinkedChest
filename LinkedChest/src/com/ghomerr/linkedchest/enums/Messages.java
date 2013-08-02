@@ -19,6 +19,7 @@ public enum Messages
 	HELP_LIST("Display the available linked chests or those which start with given letters. Example: /lc list a"),
 	HELP_MOVE("Move the given master chest to the targeted empty chest. Example: /lc move myChest"),
 	HELP_OPEN("Remotely open a master chest. Example: /lc open myChest"),
+	HELP_POSITIONS("Display the positions of all linked chests of the chosen master chest. Example: /lc pos myChest"),
 	HELP_REMOVE("Remove the link to a master chest. Example: /lc del myChest"),
 	HELP_UNLINK("Unlink the targeted chest or unlink all chests linked to the given master chest. Example: /lc unlink myChest"),
 	HELP_VERSION("Display the plugin version. Example: /lc version"),
@@ -53,6 +54,7 @@ public enum Messages
 	CHEST_ISNOT_ADMIN(1, "The chest {chest} is not restricted to admins anymore."),
 	CHEST_ADMIN_FAILED(1, "Unable to modify the admin status of the chest {chest}."),
 	CHEST_DETAILS(1, "Details of chest {chest}: "),
+	LINKED_CHESTS_POSITIONS(1, "Positions of linked chests for the master chest {chest}: "),
 	CHEST_NOT_FOUND(1, "The chest {chest} doesn't exist."),
 	UNKNOWN_COMMAND("The command {command} doesn't exist."),
 	COMMAND_NOT_ALLOWED(1, "You are not allowed to use the command {command}."),
@@ -61,7 +63,7 @@ public enum Messages
 	TARGET_CHEST_ALREADY_MASTER(1, "You cannot do that. The targeted chest is the master chest {chest}."),
 	TARGET_CHEST_ALREADY_LINKED(2, "Unable to add the chest {chest1}. The targeted chest is linked to the chest {chest2}."),
 	TARGET_CHEST_NOT_EMPTY("The targeted chest is not empty."),
-	TARGET_CHEST_SIZE_INVALID("The targeted chest has not the same size as the chosen master chest."),
+	TARGET_CHEST_SIZE_INVALID("The targeted chest is not big enough to contain the items of the chose master chest."),
 	CANNOT_PLACE_CHEST_NEARBY(1, "You cannot place a chest nearby the master chest {chest}."),
 	CURRENT_VERSION(1, "Plugin current version: {version}"),
 	TARGET_BLOCK_ISNOT_CHEST("Target block is not a chest."),
@@ -80,7 +82,9 @@ public enum Messages
 	CONFIGURATION_PARAM_UNKNOWN(1, "Configuration parameter {param} is unknown."),
 	CONFIGURATION_VALUE_INVALID(2, "The value {value} for the configuration parameter {param} is invalid."),
 	CONFIGURATION_UPDATE_FAILED(2, "Unable to update the configuration parameter {param} with value {value}."),
-	CONFIGURATION_VALUE_NEEDED(1, "The configuration parameter {param} needs a value to be updated.");
+	CONFIGURATION_VALUE_NEEDED(1, "The configuration parameter {param} needs a value to be updated."),
+	LINKED_CHEST_INFO("linked chest(s)."),
+	NONE("None.");
 
 	public String message;
 	public int varNumber;

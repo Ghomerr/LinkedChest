@@ -17,6 +17,7 @@ public enum PermissionsNodes
 	LIST(Commands.LIST, Constants.PERMISSIONS_ROOT + "list", false),
 	MOVE(Commands.MOVE, Constants.PERMISSIONS_ROOT + "move", true),
 	OPEN_REMOTE(Commands.OPEN, Constants.PERMISSIONS_ROOT + "openremote", true),
+	POSITIONS(Commands.POSITIONS, Constants.PERMISSIONS_ROOT + "positions", false),
 	REMOVE(Commands.REMOVE, Constants.PERMISSIONS_ROOT + "remove", true),
 	UNLINK(Commands.UNLINK, Constants.PERMISSIONS_ROOT + "unlink", true),
 	VERSION(Commands.VERSION, Constants.PERMISSIONS_ROOT + "version", false),

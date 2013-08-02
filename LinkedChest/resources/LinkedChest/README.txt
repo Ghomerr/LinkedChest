@@ -13,6 +13,7 @@ INTRODUCTION:
 	You wont be able to place a chest near a simple master chest. Place it before adding the master chest.
 	Double master chests seems to not work in versions older than 1.2.3 of Craftbukkit.
 	You cannot open linked or master chests if a block is in hand, to avoid a conflict with the shift-click.
+	You can easily move a master chest while keeping all linked chests. You can even move a single master chest to a double master chest and vice versa.
 
 1) How to install:
 	Only put the "LinkedChest-x.x.x.jar" file in your plugins directory, inside the minecraft server directory.
@@ -51,6 +52,7 @@ INTRODUCTION:
 		linkedchest.list
 		linkedchest.move
 		linkedchest.openremote
+		linkedchest.positions
 		linkedchest.remove
 		linkedchest.unlink
 		linkedchest.version
@@ -69,7 +71,8 @@ INTRODUCTION:
 		/lc config <p> <v> : display the current config or update a configuration parameter. Boolean parameters can be toggle if no value is typed.
 		/lc link <n> : link the targeted chest to a master chest
 		/lc open : remotely open a chest
-		/lc move <n> : move the given master chest to the targeted chest. The target must be empty and must have the same size. Does not unlink the master chest if it was previously linked.
+		/lc positions <n> : list all linked chests positions of the chosen master chest. Double linked chests will appear twice for each part of the double chest. 
+		/lc move <n> : move the given master chest to the targeted chest. The target chest must be empty and must be able to contain all items from the chosen master chest. Does not unlink the master chest if it was previously linked.
 		/lc remove <n> : remove a master chest
 		/lc unlink (<n>) : unlink the targeted chest or all chests of the given master chests
 		

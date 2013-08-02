@@ -33,6 +33,8 @@ public enum Commands
 	MOVE(Messages.HELP_MOVE, new String[] {"mv", "move"}),
 
 	OPEN(Messages.HELP_OPEN, new String[] {"op", "open"}),
+	
+	POSITIONS(Messages.HELP_POSITIONS, new String[] {"ps", "po", "pos", "position", "positions"}),
 
 	UNLINK(Messages.HELP_UNLINK, new String[] {"ul", "un", "ulink", "unlink", "fr", "free"}),
 

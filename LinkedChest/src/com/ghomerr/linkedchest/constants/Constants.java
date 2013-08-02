@@ -50,6 +50,10 @@ public interface Constants
 	
 	public static final String EQUAL = "=";
 	
+	public static final String NEW_LINE = "\n";
+	
+	public static final String LEFT_BRACKET = "[", RIGHT_BRACKET = "]";
+	
 	public static final String VAR_MESSAGE_TAG = "\\{[a-zA-Z0-9_-]+\\}";
 	
 	public static final char VAR_MESSAGE_OPEN = '{';

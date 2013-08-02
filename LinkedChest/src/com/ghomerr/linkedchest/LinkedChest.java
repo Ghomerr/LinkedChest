@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
@@ -501,13 +502,14 @@ public class LinkedChest extends JavaPlugin
 				ChatColor.YELLOW));
 
 		boolean isFirst = true;
-		Set<String> chestsNamesList = null;
+		final TreeSet<String> chestsNamesList = new TreeSet<String>();
 
 		synchronized (_monitor)
 		{
-			chestsNamesList = _virtualInventoriesMap.keySet();
+			chestsNamesList.addAll(_virtualInventoriesMap.keySet());
 		}
-
+		
+		final int initLength = strBld.length();
 		for (final String chestName : chestsNamesList)
 		{
 			if (displayAllChests || chestName.startsWith(param))
@@ -522,6 +524,12 @@ public class LinkedChest extends JavaPlugin
 				}
 				strBld.append(ChatColor.AQUA).append(chestName);
 			}
+		}
+		
+		// No chest to display
+		if (initLength == strBld.length())
+		{
+			strBld.append(ChatColor.AQUA).append(MessagesUtils.get(Messages.NONE));
 		}
 
 		return strBld.toString();
@@ -681,6 +689,52 @@ public class LinkedChest extends JavaPlugin
 		if (vInv != null)
 		{
 			strBld.append(ChatColor.WHITE).append(vInv.getDataString());
+			
+			strBld.append(Constants.SEPARATOR).append(vInv.linkedChests.size()).append(Constants.EMPTY_STRING)
+			.append(MessagesUtils.get(Messages.LINKED_CHEST_INFO));
+		}
+
+		return strBld.toString();
+	}
+	
+	public String getLinkedChestsPositions(final String masterChestName)
+	{
+		final String chestName = masterChestName.toLowerCase();
+		final StringBuilder strBld = new StringBuilder();
+
+		strBld.append(MessagesUtils.getWithColors(Messages.LINKED_CHESTS_POSITIONS, ChatColor.YELLOW, ChatColor.AQUA, chestName))
+			.append(Constants.NEW_LINE).append(ChatColor.WHITE);
+
+		VirtualInventory vInv = null;
+		synchronized (_monitor)
+		{
+			vInv = _virtualInventoriesMap.get(chestName);
+		}
+		
+		if (vInv != null)
+		{
+			boolean isFirst = false;
+			int counter = 1;
+			
+			final TreeSet<String> orderedSet = new TreeSet<String>();
+			orderedSet.addAll(vInv.linkedChests);
+			
+			for (String lcShortLoc : orderedSet)
+			{
+				if (!isFirst)
+				{
+					isFirst = true;
+				}
+				else 
+				{
+					strBld.append(Constants.NEW_LINE);
+				}
+				strBld.append(Constants.LEFT_BRACKET).append(counter).append(Constants.RIGHT_BRACKET).append(Constants.EMPTY_STRING)
+				.append(lcShortLoc);
+				counter++;
+			}
+			
+			orderedSet.clear();
 		}
 
 		return strBld.toString();
