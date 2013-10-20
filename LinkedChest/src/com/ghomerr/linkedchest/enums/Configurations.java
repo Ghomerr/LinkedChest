@@ -10,6 +10,8 @@ public enum Configurations
 	
 //	HOPPERS("hoppers", Boolean.class, Boolean.TRUE),
 	
+	USE_UTF8("useutf8", Boolean.class, Boolean.FALSE),
+	
 	DISPLAY_OPEN_MESSAGE("displayopenmessage", Boolean.class, Boolean.TRUE),
 	
 	LANGUAGE("language", String.class, Constants.DEFAULT_LANGUAGE),

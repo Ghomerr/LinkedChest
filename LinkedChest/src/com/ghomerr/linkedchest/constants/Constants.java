@@ -69,4 +69,6 @@ public interface Constants
 	public static final String NUMBER_PATTERN = "^[0-9]+$";
 	
 	public static final String HOPPER_CREATOR_KEY = "hoppercreator";
+	
+	public static final String ENCODING_UTF8 = "utf-8";
 }

@@ -3,6 +3,7 @@ package com.ghomerr.linkedchest.utils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.logging.Logger;
@@ -10,6 +11,7 @@ import java.util.logging.Logger;
 import org.bukkit.ChatColor;
 
 import com.ghomerr.linkedchest.constants.Constants;
+import com.ghomerr.linkedchest.enums.Configurations;
 import com.ghomerr.linkedchest.enums.Messages;
 
 public class MessagesUtils
@@ -47,7 +49,15 @@ public class MessagesUtils
 			final Properties pluginMessages = new Properties();
 			try
 			{
-				pluginMessages.load(in);
+				final boolean useUtf8 = ConfigurationUtils.getConfigValueByType(Configurations.USE_UTF8, Boolean.class);
+				if (useUtf8) 
+				{
+					pluginMessages.load(new InputStreamReader (in, Constants.ENCODING_UTF8));
+				}
+				else 
+				{
+					pluginMessages.load(in);
+				}
 				in.close();
 			}
 			catch (final IOException ex)
