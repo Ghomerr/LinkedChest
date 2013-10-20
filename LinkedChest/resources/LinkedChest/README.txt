@@ -39,6 +39,7 @@ INTRODUCTION:
 	You must let the messages variables inside braces "{}" to let the plugin replace them by dynamic parameters, as chest names.
 	Messages variables names does not matter. It is based on variables order. You must keep the same number of variables, otherwise the default message will be used.
 	If a message is missing, it will be its default value which will be displayed ingame.
+	You can also use messages file in UTF-8 encoding. Just enable it in the configuration: useutf8=true.
 	
 4) Permissions Nodes:
 	Commands permissions

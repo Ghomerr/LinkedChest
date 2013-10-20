@@ -4,6 +4,10 @@ TODO:
 - Config : max number of linked chests allowed 
 - In details command: show coordinates of masters and linked chests.
 
+Version 1.4.1 on 2013-10-20:
+* Use utf-8 for messages files if needed.
+* New configuration to enable utf-8 on messages file loading.
+
 Version 1.4.0 on 2013-08-02:
 * Master Chests details display number of LinkedChests.
 * The /lc move command does not check the size of the target chest anymore. This allows to change the size of the master chests without losing all links. Content must fit the destination chest.
